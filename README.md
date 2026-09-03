@@ -98,24 +98,6 @@ alta com `letter-spacing` aberto.
 As dez fotografias estão embutidas como data URIs. O arquivo pesa cerca de 1,4 MB e
 funciona offline; a única requisição externa é o Google Fonts.
 
-## Como rodar
-
-Abra o `index.html` no navegador. É isso.
-
-Se preferir servir por HTTP:
-
-```bash
-python3 -m http.server 8000
-# depois acesse http://localhost:8000
-```
-
-## Publicar no GitHub Pages
-
-1. Garanta que o arquivo se chame `index.html` na raiz do repositório
-2. Vá em **Settings → Pages**
-3. Em *Source*, selecione a branch `main` e a pasta `/ (root)`
-4. Salve — a página fica no ar em alguns minutos
-
 ## Licença
 
 Código sob licença MIT — use, adapte e aprenda à vontade.

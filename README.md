@@ -25,13 +25,7 @@ Sócios: Helena Aragão, Rubens Vilela, Marina Bittencourt, Otávio Prado.
 8. Nav que inverte para escuro sobre seções ink
 Easing padrão `cubic-bezier(.16,1,.3,1)`, 400–800ms. Tudo desligado em `prefers-reduced-motion`.
 
-## Obrigatório no rodapé (pedido do Caik)
+## Obrigatório no rodapé
 - Crédito e link para https://github.com/CaikRian
 - Aviso de que o escritório e todos os dados são fictícios / site de demonstração
 - Aviso de que todas as fotografias foram geradas por IA
-
-## Aprendizados reutilizáveis
-- O sandbox não alcança fonts.googleapis.com — screenshots de verificação saem com fonte fallback.
-- Artifact: o arquivo publicado não leva doctype/html/head/body; imagens precisam ser data URI.
-  O `build.py` gera as duas versões (artifact + standalone) a partir do mesmo template.
-- Cuidado recorrente: aplicar `grid-column` no filho em vez do wrapper quebra o layout silenciosamente.

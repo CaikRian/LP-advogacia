@@ -1,31 +1,129 @@
 # LP-advogacia
 
-# Aragão · Vilela — landing page de advocacia (fictícia)
+# Aragão · Vilela — Landing page de advocacia
 
-## Marca fictícia
-Aragão · Vilela — Sociedade de Advogados. São Paulo e Recife, desde 1998.
-Posicionamento: "Litígio não se improvisa". Contencioso estratégico, arbitragem,
-societário, sucessões, reestruturação, investigações internas.
-Sócios: Helena Aragão, Rubens Vilela, Marina Bittencourt, Otávio Prado.
+Landing page de página única para um escritório de advocacia **fictício**, feita como
+peça de portfólio: HTML, CSS e JavaScript puros, em um arquivo só, sem framework,
+sem build e sem dependência de runtime.
+
+> **Aviso:** Aragão · Vilela não existe. Nome, sócios, casos, números, endereços e
+> reconhecimentos são inventados. Todas as fotografias foram geradas por
+> inteligência artificial — as pessoas retratadas não existem.
+
+**[Ver ao vivo →](https://caikrian.github.io/aragao-vilela-landing/)** <!-- ajuste a URL depois de publicar -->
+
+<!-- Sugestão: adicione um print em docs/preview.png e descomente a linha abaixo
+![Preview da landing page](docs/preview.png)
+-->
+
+---
+
+## Sobre o projeto
+
+O briefing era simples de enunciar e difícil de executar: uma página que parecesse
+saída de um estúdio de design, não de um gerador de templates. Isso significou
+recusar os atalhos de sempre — gradiente roxo-azul, hero centralizado com badge,
+três cards iguais com ícone, `border-radius` em tudo, Inter como fonte de título.
+
+O resultado é uma página construída como um dossiê: grid de 12 colunas visível em
+linhas finas, seções numeradas como autos processuais (§01 a §08), textura de grão
+sobre todos os fundos e blocos sangrando para fora da viewport.
+
+## Destaques técnicos
+
+**Movimento conduzido por scroll**
+
+- Revelação tipográfica linha a linha com máscara (`overflow: hidden` + `translateY`), com atraso escalonado por variável CSS
+- Seção de áreas de atuação com *sticky pin*: a imagem e a numeração trocam conforme a coluna de texto rola
+- Seção de casos com scroll horizontal fixado, que vira swipe com `scroll-snap` no mobile
+- Parallax por camadas nas fotografias, calculado dentro de um único `requestAnimationFrame`
+- Texto da declaração acendendo palavra por palavra conforme entra na tela
+
+**Interação**
+
+- Cursor customizado com anel de inércia (lerp), que cresce sobre elementos interativos
+- Botões magnéticos, que se deslocam na direção do ponteiro
+- Barra de navegação que se inverte automaticamente ao passar sobre seções escuras
+- Micro-interações com easing próprio `cubic-bezier(.16, 1, .3, 1)` e duração de 400–800 ms
+
+**Elemento generativo**
+
+- Canvas 2D no hero com uma malha de pontos de tinta que se abre e ganha cor conforme
+  o ponteiro se aproxima, com amortecimento e retorno à posição de origem
+
+**Acessibilidade e performance**
+
+- `prefers-reduced-motion` desliga cursor, parallax, scroll horizontal, canvas e revelações
+- Foco visível, HTML semântico, `alt` descritivo em todas as imagens, contraste verificado
+- Anima apenas `transform` e `opacity`; nenhuma biblioteca externa
+- Responsivo por reformulação de layout, não por empilhamento — cada seção tem um
+  comportamento próprio no mobile
+
+## Stack
+
+| Camada | O que foi usado |
+| --- | --- |
+| Marcação | HTML5 semântico |
+| Estilo | CSS puro — custom properties, Grid, `clamp()`, `aspect-ratio`, `position: sticky` |
+| Comportamento | JavaScript vanilla — `IntersectionObserver`, Canvas 2D, `requestAnimationFrame` |
+| Tipografia | Fraunces (display variável), Archivo (corpo), IBM Plex Mono (dados) |
+| Textura | Grão gerado por `feTurbulence` em SVG inline, aplicado em `mix-blend-mode: multiply` |
+| Dependências | Nenhuma |
 
 ## Direção de arte
-- Paleta: bone `#E9E3D6` · ink `#15140F` · sage `#3B4430` · vermelhão `#B33A1E` (acento) · greige `#8A8272`
-- Tipos: Fraunces (display variável, tracking −0.035em) · Archivo (corpo) · IBM Plex Mono (labels/§)
-- Conceito: "dossiê" — grid de 12 colunas visível em hairlines, seções numeradas §01–§08,
-  blocos sangrando para fora da viewport, textura de grão SVG animado em multiply.
 
-## Efeitos implementados
-1. Reveal tipográfico por linha com máscara (`overflow:hidden` + `translateY`) e stagger via `--d`
-2. Sticky pin nas áreas de atuação, com troca de imagem e numeração
-3. Scroll horizontal pinado na seção de casos (fallback: swipe com scroll-snap no mobile)
-4. Parallax por camadas nas fotos + máscara/saturação no hover dos retratos
-5. Canvas generativo: malha de pontos de tinta que reage ao mouse no hero
-6. Cursor custom com ring atrasado, botões magnéticos, underline animado
-7. Palavras da declaração acendendo conforme o scroll
-8. Nav que inverte para escuro sobre seções ink
-Easing padrão `cubic-bezier(.16,1,.3,1)`, 400–800ms. Tudo desligado em `prefers-reduced-motion`.
+Paleta com um neutro dominante inesperado e um único acento de alta saturação,
+usado com parcimônia.
 
-## Obrigatório no rodapé
-- Crédito e link para https://github.com/CaikRian
-- Aviso de que o escritório e todos os dados são fictícios / site de demonstração
-- Aviso de que todas as fotografias foram geradas por IA
+| Cor | Hex | Uso |
+| --- | --- | --- |
+| Bone | `#E9E3D6` | Fundo dominante |
+| Ink | `#15140F` | Texto e seções escuras |
+| Sage | `#3B4430` | Banda de declaração |
+| Vermelhão | `#B33A1E` | Acento — cerca de 2% da tela |
+| Greige | `#8A8272` | Texto de apoio e metadados |
+
+Títulos em Fraunces com `clamp()` de até 11,6vw e *tracking* negativo de −0.035em.
+Corpo em Archivo. Eyebrows, numeração de seções e dados em IBM Plex Mono, em caixa
+alta com `letter-spacing` aberto.
+
+## Estrutura
+
+```
+.
+├── index.html      # a página inteira — marcação, estilo, script e imagens em base64
+└── README.md
+```
+
+As dez fotografias estão embutidas como data URIs. O arquivo pesa cerca de 1,4 MB e
+funciona offline; a única requisição externa é o Google Fonts.
+
+## Como rodar
+
+Abra o `index.html` no navegador. É isso.
+
+Se preferir servir por HTTP:
+
+```bash
+python3 -m http.server 8000
+# depois acesse http://localhost:8000
+```
+
+## Publicar no GitHub Pages
+
+1. Garanta que o arquivo se chame `index.html` na raiz do repositório
+2. Vá em **Settings → Pages**
+3. Em *Source*, selecione a branch `main` e a pasta `/ (root)`
+4. Salve — a página fica no ar em alguns minutos
+
+## Licença
+
+Código sob licença MIT — use, adapte e aprenda à vontade.
+
+As fotografias foram geradas por IA e acompanham o projeto apenas para fins de
+demonstração. Os textos descrevem um escritório fictício e não constituem oferta de
+serviços jurídicos nem orientação legal.
+
+---
+
+Projeto e código por **[Caik Rian](https://github.com/CaikRian)**.
